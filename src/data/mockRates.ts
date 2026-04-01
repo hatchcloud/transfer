@@ -14,4 +14,4 @@ export function getRate(from: string, to: string): ExchangeRate | null {
   return mockRates.find(r => r.from === from && r.to === to) ?? null
 }
 
-export const currencies = ['USD', 'EUR', 'GBP', 'JPY', 'CAD', 'AUD']
+export const currencies = ['USD', 'EUR', 'GBP', 'JPY', 'CAD', 'AUD'] as const

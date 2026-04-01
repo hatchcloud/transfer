@@ -18,7 +18,7 @@ export interface ExchangeRate {
   from: string
   to: string
   rate: number
-  fee: number
+  fee: number // flat fee in the 'from' currency
 }
 
 export interface TransferFormData {
@@ -28,7 +28,7 @@ export interface TransferFormData {
   newRecipientName: string
   newRecipientEmail: string
   newRecipientCountry: string
-  amount: string
+  amount: string // kept as string for form binding; coerce with parseFloat before calculations
   currency: string
   date: string
   memo: string
