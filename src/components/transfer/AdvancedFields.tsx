@@ -18,7 +18,7 @@ export default function AdvancedFields({
       {!expanded ? (
         <button
           type="button"
-          className="text-sm text-text-weak hover:text-text-strong transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-input-focus-border rounded flex items-center gap-1"
+          className="text-sm text-text-weak hover:text-text-strong cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-input-focus-border rounded flex items-center gap-1"
           onClick={() => onToggle(true)}
         >
           <span>＋</span> Add date, memo &amp; reference
@@ -27,7 +27,7 @@ export default function AdvancedFields({
         <div className="space-y-3">
           <button
             type="button"
-            className="text-sm text-text-weak hover:text-text-strong transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-input-focus-border rounded"
+            className="text-sm text-text-weak hover:text-text-strong cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-input-focus-border rounded"
             onClick={() => onToggle(false)}
           >
             － Hide details

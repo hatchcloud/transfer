@@ -1,7 +1,8 @@
 import { useLocation, useNavigate } from 'react-router-dom'
+import { toast } from 'sonner'
+import { CircleCheck, ArrowRight } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Separator } from '@/components/ui/separator'
 import { TransferPayload } from '@/lib/types'
 
 const PREVIEW_PAYLOAD: TransferPayload = {
@@ -26,27 +27,50 @@ export default function SuccessScreen() {
   }
 
   const recipientName = payload.toContact?.name ?? payload.newRecipientName
+  const formattedAmount = parseFloat(payload.amount).toLocaleString(undefined, {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  })
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
-      <Card className="w-full max-w-md text-center">
-        <CardContent className="pt-8 pb-8 space-y-4">
-          <div className="text-5xl">✅</div>
-          <h1 className="text-2xl font-bold text-text-strong">Transfer Sent!</h1>
-          <p className="text-text-weak text-sm">
-            <span className="font-medium">${parseFloat(payload.amount).toFixed(2)} {payload.fromAccount.currency}</span> sent to <span className="font-medium">{recipientName}</span>.
-            <br />Arrives in 1–2 business days.
+      <Card className="w-full max-w-md">
+        <CardContent className="pt-10 pb-8 px-8">
+          {/* Icon + headline group */}
+          <div className="flex flex-col items-center text-center mb-8">
+            <div className="size-14 rounded-2xl bg-emerald-50 flex items-center justify-center mb-4">
+              <CircleCheck className="size-7 text-emerald-600" />
+            </div>
+            <h1 className="text-xl font-semibold text-text-strong mb-1">Transfer Sent</h1>
+            <p className="text-sm text-text-weak">Arrives in 1–2 business days</p>
+          </div>
+
+          {/* Hero amount */}
+          <div className="rounded-xl bg-surface-brand-soft border border-[rgba(23,37,84,0.1)] px-5 py-5 text-center mb-8">
+            <p className="text-3xl font-bold text-text-strong tabular-nums tracking-tight mb-1">
+              {formattedAmount}
+              <span className="text-base font-semibold text-text-weak ml-1.5">{payload.fromAccount.currency}</span>
+            </p>
+            <p className="text-sm text-text-weak">
+              sent to <span className="font-medium text-text-strong">{recipientName}</span>
+            </p>
+          </div>
+
+          {/* Reference */}
+          <p className="text-center text-xs text-text-weak mb-8">
+            Ref: <span className="font-mono">{payload.transactionRef}</span>
           </p>
-          <Separator />
-          <p className="text-xs text-text-weak">
-            Transaction ref: <span className="font-mono">{payload.transactionRef}</span>
-          </p>
-          <div className="space-y-2 pt-2">
-            <Button className="w-full" onClick={() => navigate('/form')}>New Transfer</Button>
+
+          {/* Actions */}
+          <div className="space-y-3">
+            <Button className="w-full" onClick={() => navigate('/form')}>
+              New Transfer
+              <ArrowRight className="size-4" />
+            </Button>
             <button
               type="button"
-              className="text-sm text-text-weak hover:text-text-strong transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-input-focus-border rounded py-1"
-              onClick={() => {}}
+              className="flex items-center justify-center w-full text-sm text-text-weak hover:text-text-strong cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-input-focus-border rounded py-2"
+              onClick={() => toast('This is just a prototype :)', { description: 'Transaction history coming soon!' })}
             >
               View transaction history
             </button>

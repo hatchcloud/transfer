@@ -43,24 +43,26 @@ export default function ConfirmationScreen() {
           <CardTitle className="text-xl font-semibold text-text-strong">Review Transfer</CardTitle>
           <p className="text-sm text-text-weak">Please confirm the details below before sending.</p>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent className="space-y-5">
           {isFirstTime && <ValidationBanner type="first-time" />}
           <TransferSummary payload={payload} />
-          <Button
-            onClick={handleConfirm}
-            className="w-full"
-          >
-            <Check className="size-4" />
-            Confirm &amp; Send
-          </Button>
-          <button
-            type="button"
-            className="flex items-center justify-center gap-1.5 w-full text-sm text-text-weak hover:text-text-strong transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-input-focus-border rounded py-1"
-            onClick={() => navigate(-1)}
-          >
-            <ArrowLeft className="size-4" />
-            Go back &amp; edit
-          </button>
+          <div className="space-y-3 pt-1">
+            <Button
+              onClick={handleConfirm}
+              className="w-full"
+            >
+              <Check className="size-4" />
+              Confirm &amp; Send
+            </Button>
+            <button
+              type="button"
+              className="flex items-center justify-center gap-1.5 w-full text-sm text-text-weak hover:text-text-strong cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-input-focus-border rounded py-2"
+              onClick={() => navigate(-1)}
+            >
+              <ArrowLeft className="size-4" />
+              Go back &amp; edit
+            </button>
+          </div>
         </CardContent>
       </Card>
     </div>

@@ -51,7 +51,7 @@ export default function RecipientField({
               <button
                 type="button"
                 aria-label="Clear recipient"
-                className="text-text-weak hover:text-text-strong transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-input-focus-border rounded"
+                className="text-text-weak hover:text-text-strong cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-input-focus-border rounded"
                 onClick={() => { onContactSelect({ id: '', name: '' }); setSearch('') }}
               >
                 <X className="size-4" />
@@ -75,7 +75,7 @@ export default function RecipientField({
                     <button
                       key={contact.id}
                       type="button"
-                      className="w-full text-left px-3 h-8 flex items-center justify-between rounded text-sm text-[#1c2024] hover:bg-surface-base transition-colors"
+                      className="w-full text-left px-3 h-8 flex items-center justify-between rounded text-sm text-[#1c2024] hover:bg-surface-base cursor-pointer transition-colors"
                       onClick={() => { onContactSelect(contact); setSearch(''); setShowDropdown(false) }}
                     >
                       <span>{contact.name}</span>
@@ -96,7 +96,7 @@ export default function RecipientField({
       {!isNewRecipient && !selected && (
         <button
           type="button"
-          className="flex items-center gap-1.5 text-sm text-text-weak hover:text-text-strong transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-input-focus-border rounded"
+          className="flex items-center gap-1.5 text-sm text-text-weak hover:text-text-strong cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-input-focus-border rounded"
           onClick={() => onNewRecipientToggle(true)}
         >
           <UserPlus className="size-4" />
@@ -111,7 +111,7 @@ export default function RecipientField({
             <button
               type="button"
               aria-label="Cancel new recipient"
-              className="flex items-center gap-1 text-sm text-text-weak hover:text-text-strong transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-input-focus-border rounded px-1"
+              className="flex items-center gap-1 text-sm text-text-weak hover:text-text-strong cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-input-focus-border rounded px-1"
               onClick={() => onNewRecipientToggle(false)}
             >
               <X className="size-4" />
