@@ -9,7 +9,7 @@ export default function AppHeader() {
 
   return (
     <header className="sticky top-0 z-20 bg-white/60 backdrop-blur-xl backdrop-saturate-150 border-b border-[rgba(23,37,84,0.06)]">
-      <div className="mx-auto max-w-md flex items-center justify-between h-14">
+      <div className="mx-auto max-w-md flex items-center justify-between h-14 px-4 sm:px-6">
         {isHome ? (
           <button
             type="button"
