@@ -9,8 +9,8 @@ export interface Account {
 export interface Contact {
   id: string
   name: string
-  email: string
-  country: string
+  phone?: string
+  accountNumber?: string
   lastTransfer?: string
 }
 
@@ -26,8 +26,8 @@ export interface TransferFormData {
   toContactId: string
   isNewRecipient: boolean
   newRecipientName: string
-  newRecipientEmail: string
-  newRecipientCountry: string
+  newRecipientPhone: string
+  newRecipientAccountNumber: string
   amount: string // kept as string for form binding; coerce with parseFloat before calculations
   currency: string
   date: string

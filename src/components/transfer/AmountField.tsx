@@ -1,6 +1,8 @@
+import { ArrowLeftRight } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { FieldError } from '@/components/ui/field-error'
 import { currencies, getRate } from '@/data/mockRates'
 
 interface AmountFieldProps {
@@ -29,7 +31,7 @@ export default function AmountField({
           placeholder="0.00"
           value={value}
           onChange={e => onAmountChange(e.target.value)}
-          className={error ? 'border-red-500' : ''}
+          aria-invalid={!!error}
           type="number"
           min="0"
           step="0.01"
@@ -47,20 +49,32 @@ export default function AmountField({
       </div>
 
       {rate && (
-        <p className="text-xs text-slate-500">
-          1 {accountCurrency} = {rate.rate} {currency}
-          {amount > 0 && ` · You send ≈ ${(amount * rate.rate).toFixed(2)} ${currency}`}
-          {` · Fee: $${rate.fee.toFixed(2)}`}
-        </p>
+        <div className="rounded-lg border border-[rgba(23,37,84,0.1)] bg-surface-brand-soft px-4 py-3 space-y-2">
+          {amount > 0 && (
+            <div className="flex items-baseline justify-between gap-4">
+              <span className="text-sm text-text-weak">You send</span>
+              <span className="text-xl font-bold text-text-strong tabular-nums">
+                {(amount * rate.rate).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} {currency}
+              </span>
+            </div>
+          )}
+          <div className="flex items-center justify-between">
+            <span className="flex items-center gap-1.5 text-xs text-text-weak">
+              <ArrowLeftRight className="size-3 shrink-0" />
+              1 {accountCurrency} = {rate.rate.toLocaleString()} {currency}
+            </span>
+            <span className="text-xs text-text-weak">Fee ${rate.fee.toFixed(2)}</span>
+          </div>
+        </div>
       )}
 
       {!error && (
-        <p className="text-xs text-green-600">
+        <p className="text-sm text-text-weak">
           Available: ${availableBalance.toLocaleString('en-US', { minimumFractionDigits: 2 })}
         </p>
       )}
 
-      {error && <p className="text-xs text-red-500">{error}</p>}
+      {error && <FieldError message={error} />}
     </div>
   )
 }

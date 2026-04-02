@@ -5,7 +5,7 @@ import SuccessScreen from '@/components/success/SuccessScreen'
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-surface-base">
       <Routes>
         <Route path="/form" element={<TransferForm />} />
         <Route path="/confirm" element={<ConfirmationScreen />} />

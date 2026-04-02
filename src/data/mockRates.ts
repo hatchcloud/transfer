@@ -2,11 +2,11 @@ import { ExchangeRate } from '@/lib/types'
 
 export const mockRates: ExchangeRate[] = [
   { from: 'USD', to: 'EUR', rate: 0.921, fee: 2.40 },
-  { from: 'USD', to: 'GBP', rate: 0.786, fee: 2.90 },
-  { from: 'USD', to: 'JPY', rate: 149.50, fee: 1.80 },
-  { from: 'USD', to: 'CAD', rate: 1.357, fee: 1.50 },
-  { from: 'USD', to: 'AUD', rate: 1.534, fee: 1.70 },
+  { from: 'USD', to: 'CRC', rate: 462, fee: 1.00 },
   { from: 'EUR', to: 'USD', rate: 1.086, fee: 2.40 },
+  { from: 'EUR', to: 'CRC', rate: 501.7, fee: 1.50 },
+  { from: 'CRC', to: 'USD', rate: 0.00216, fee: 1.00 },
+  { from: 'CRC', to: 'EUR', rate: 0.00199, fee: 1.50 },
 ]
 
 export function getRate(from: string, to: string): ExchangeRate | null {
@@ -14,4 +14,4 @@ export function getRate(from: string, to: string): ExchangeRate | null {
   return mockRates.find(r => r.from === from && r.to === to) ?? null
 }
 
-export const currencies = ['USD', 'EUR', 'GBP', 'JPY', 'CAD', 'AUD'] as const
+export const currencies = ['USD', 'EUR', 'CRC'] as const

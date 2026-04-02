@@ -11,6 +11,7 @@ import { mockAccounts } from '@/data/mockAccounts'
 import { mockContacts } from '@/data/mockContacts'
 import { getRate } from '@/data/mockRates'
 import { TransferPayload, Contact } from '@/lib/types'
+import { FieldError } from '@/components/ui/field-error'
 import AmountField from './AmountField'
 import RecipientField from './RecipientField'
 import AdvancedFields from './AdvancedFields'
@@ -24,7 +25,7 @@ export default function TransferForm() {
     resolver: zodResolver(transferSchema),
     defaultValues: {
       fromAccountId: '', toContactId: '', isNewRecipient: false,
-      newRecipientName: '', newRecipientEmail: '', newRecipientCountry: '',
+      newRecipientName: '', newRecipientPhone: '', newRecipientAccountNumber: '',
       amount: '', currency: 'USD', date: '', memo: '', reference: '',
     },
   })
@@ -40,7 +41,7 @@ export default function TransferForm() {
     if (isInsufficient) return
     const fromAccount = mockAccounts.find(a => a.id === data.fromAccountId)!
     const toContact = data.isNewRecipient
-      ? { id: 'new', name: data.newRecipientName, email: data.newRecipientEmail, country: data.newRecipientCountry }
+      ? { id: 'new', name: data.newRecipientName, phone: data.newRecipientPhone || undefined, accountNumber: data.newRecipientAccountNumber || undefined }
       : mockContacts.find(c => c.id === data.toContactId) ?? null
     const rate = getRate(fromAccount.currency, data.currency)
     const payload: TransferPayload = {
@@ -67,19 +68,23 @@ export default function TransferForm() {
             <div className="space-y-1.5">
               <Label>From</Label>
               <Select value={values.fromAccountId} onValueChange={v => setValue('fromAccountId', v)}>
-                <SelectTrigger className={errors.fromAccountId ? 'border-red-500' : ''}>
+                <SelectTrigger aria-invalid={!!errors.fromAccountId}>
                   <SelectValue placeholder="Select account" />
                 </SelectTrigger>
                 <SelectContent>
                   {mockAccounts.map(acc => (
-                    <SelectItem key={acc.id} value={acc.id}>
-                      {acc.label} {acc.masked}
+                    <SelectItem
+                      key={acc.id}
+                      value={acc.id}
+                      detail={`$${acc.balance.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`}
+                    >
+                      {acc.label} · {acc.masked}
                     </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
-              {errors.fromAccountId && (
-                <p className="text-xs text-red-500">{errors.fromAccountId.message}</p>
+              {errors.fromAccountId?.message && (
+                <FieldError message={errors.fromAccountId.message} />
               )}
             </div>
 
@@ -88,16 +93,16 @@ export default function TransferForm() {
               value={values.toContactId}
               isNewRecipient={values.isNewRecipient}
               newRecipientName={values.newRecipientName}
-              newRecipientEmail={values.newRecipientEmail}
-              newRecipientCountry={values.newRecipientCountry}
+              newRecipientPhone={values.newRecipientPhone}
+              newRecipientAccountNumber={values.newRecipientAccountNumber}
               onContactSelect={(contact: Contact) => setValue('toContactId', contact.id)}
               onNewRecipientToggle={v => setValue('isNewRecipient', v)}
               onNewRecipientChange={data => {
                 if (data.name !== undefined) setValue('newRecipientName', data.name)
-                if (data.email !== undefined) setValue('newRecipientEmail', data.email)
-                if (data.country !== undefined) setValue('newRecipientCountry', data.country)
+                if (data.phone !== undefined) setValue('newRecipientPhone', data.phone)
+                if (data.accountNumber !== undefined) setValue('newRecipientAccountNumber', data.accountNumber)
               }}
-              error={errors.toContactId?.message ?? errors.newRecipientName?.message}
+              error={errors.toContactId?.message ?? errors.newRecipientName?.message ?? errors.newRecipientPhone?.message}
             />
 
             {/* Amount */}

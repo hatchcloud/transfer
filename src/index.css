@@ -1,7 +1,63 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Geist";
+  src: url("../node_modules/geist/dist/fonts/geist-sans/Geist-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("../node_modules/geist/dist/fonts/geist-mono/GeistMono-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 :root {
   --radius: 0.625rem;
+}
+
+@theme {
+  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, monospace;
+
+  /* ── Input design tokens (from Figma node 8:80) ── */
+
+  /* Surfaces */
+  --color-surface-base: #ebebeb;
+  --color-surface-raised: #ffffff;
+  --color-surface-brand-soft: rgba(23, 37, 84, 0.04);
+
+  /* Text */
+  --color-text-strong: rgba(15, 23, 42, 0.9);
+  --color-text-weak: rgba(0, 9, 51, 0.65);
+
+  /* Input: default state */
+  --color-input-border: rgba(15, 23, 42, 0.45);
+
+  /* Input: hover state */
+  --color-input-hover-bg: rgba(23, 37, 84, 0.04);
+
+  /* Input: focus state */
+  --color-input-focus-border: #020617;
+  --color-input-focus-ring: #e2e8f0;
+
+  /* Input: error state */
+  --color-input-error-border: rgba(185, 28, 28, 0.8);
+  --color-input-error-ring: #cb2a2f;
+  --color-input-error-ring-outer: #ffe6e6;
+  --color-input-error-text: #b91c1c;
+
+  /* Banner: warning */
+  --color-banner-warning-bg: #fffbeb;
+  --color-banner-warning-border: #d97706;
+  --color-banner-warning-text: #78350f;
+
+  /* Banner: error */
+  --color-banner-error-bg: #fee2e2;
+  --color-banner-error-border: #ef4444;
+  --color-banner-error-text: #991b1b;
 }

@@ -5,8 +5,8 @@ export const transferSchema = z.object({
   toContactId: z.string(),
   isNewRecipient: z.boolean(),
   newRecipientName: z.string(),
-  newRecipientEmail: z.string(),
-  newRecipientCountry: z.string(),
+  newRecipientPhone: z.string(),
+  newRecipientAccountNumber: z.string(),
   amount: z.string().refine(
     val => parseFloat(val) > 0,
     { message: 'Amount must be greater than $0' }
@@ -23,11 +23,8 @@ export const transferSchema = z.object({
     if (!data.newRecipientName) {
       ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'Name is required', path: ['newRecipientName'] })
     }
-    if (!data.newRecipientEmail) {
-      ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'Email is required', path: ['newRecipientEmail'] })
-    }
-    if (!data.newRecipientCountry) {
-      ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'Country is required', path: ['newRecipientCountry'] })
+    if (!data.newRecipientPhone && !data.newRecipientAccountNumber) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'Phone number or account number is required', path: ['newRecipientPhone'] })
     }
   }
 })
