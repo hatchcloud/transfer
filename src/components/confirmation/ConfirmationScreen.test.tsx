@@ -7,10 +7,10 @@ import { TransferPayload } from '@/lib/types'
 
 const mockPayload: TransferPayload = {
   fromAccountId: 'acc-1', toContactId: 'c-1', isNewRecipient: false,
-  newRecipientName: '', newRecipientEmail: '', newRecipientCountry: '',
+  newRecipientName: '', newRecipientPhone: '', newRecipientAccountNumber: '',
   amount: '250', currency: 'EUR', date: '2026-03-31', memo: 'Rent', reference: '',
   fromAccount: { id: 'acc-1', label: 'Checking', masked: '•••4521', balance: 4230, currency: 'USD' },
-  toContact: { id: 'c-1', name: 'Maria Santos', email: 'maria@example.com', country: 'PT' },
+  toContact: { id: 'c-1', name: 'Maria Santos', phone: '+506 8845-1234' },
   rate: { from: 'USD', to: 'EUR', rate: 0.921, fee: 2.40 },
   convertedAmount: 230.25,
   transactionRef: 'TXN-20260331-8821',
@@ -42,7 +42,7 @@ describe('ConfirmationScreen', () => {
     expect(screen.getByText('Maria Santos')).toBeInTheDocument()
   })
   it('shows first-time recipient warning when applicable', () => {
-    const firstTimePayload = { ...mockPayload, toContact: { id: 'c-4', name: 'Sofia Müller', email: 'sofia@example.de', country: 'DE' } }
+    const firstTimePayload = { ...mockPayload, toContact: { id: 'c-4', name: 'Sofia Müller', phone: '+506 8845-1234' } }
     render(
       <MemoryRouter initialEntries={[{ pathname: '/confirm', state: firstTimePayload }]}>
         <Routes><Route path="/confirm" element={<ConfirmationScreen />} /></Routes>
