@@ -37,7 +37,7 @@ export default function ConfirmationScreen() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
+    <div className="flex items-center justify-center p-4 py-8">
       <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle className="text-xl font-semibold text-text-strong">Review Transfer</CardTitle>

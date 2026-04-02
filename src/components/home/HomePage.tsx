@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { ArrowRight, Send, Clock, ChevronRight } from 'lucide-react'
+import { ArrowRight, Clock, ChevronRight } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { mockAccounts } from '@/data/mockAccounts'
@@ -14,12 +14,11 @@ export default function HomePage() {
   const navigate = useNavigate()
 
   return (
-    <div className="min-h-screen p-4 sm:p-6">
+    <div className="p-4 sm:p-6">
       <div className="mx-auto max-w-md space-y-6">
-        {/* Header */}
-        <div className="pt-4">
-          <h1 className="text-2xl font-bold text-text-strong tracking-tight">Moody</h1>
-          <p className="text-sm text-text-weak mt-0.5">Welcome back</p>
+        {/* Greeting */}
+        <div>
+          <p className="text-base text-text-strong font-medium">Welcome back, Marisol</p>
         </div>
 
         {/* Accounts */}
@@ -56,7 +55,6 @@ export default function HomePage() {
 
         {/* Quick action */}
         <Button className="w-full" onClick={() => navigate('/form')}>
-          <Send className="size-4" />
           New Transfer
           <ArrowRight className="size-4" />
         </Button>

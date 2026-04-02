@@ -33,7 +33,7 @@ export default function SuccessScreen() {
   })
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
+    <div className="flex items-center justify-center p-4 py-8">
       <Card className="w-full max-w-md">
         <CardContent className="pt-10 pb-8 px-8">
           {/* Icon + headline group */}
