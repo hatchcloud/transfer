@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
@@ -19,12 +19,14 @@ import ValidationBanner from './ValidationBanner'
 
 export default function TransferForm() {
   const navigate = useNavigate()
+  const location = useLocation()
+  const preSelectedAccountId = (location.state as { fromAccountId?: string } | null)?.fromAccountId ?? ''
   const [advancedExpanded, setAdvancedExpanded] = useState(false)
 
   const { handleSubmit, setValue, watch, formState: { errors } } = useForm<TransferSchemaType>({
     resolver: zodResolver(transferSchema),
     defaultValues: {
-      fromAccountId: '', toContactId: '', isNewRecipient: false,
+      fromAccountId: preSelectedAccountId, toContactId: '', isNewRecipient: false,
       newRecipientName: '', newRecipientPhone: '', newRecipientAccountNumber: '',
       amount: '', currency: 'USD', date: '', memo: '', reference: '',
     },
