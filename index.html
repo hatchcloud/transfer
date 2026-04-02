@@ -5,8 +5,26 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + React + TS</title>
-    <script type="module" crossorigin src="/transfer/assets/index-Cukqjfkj.js"></script>
-    <link rel="stylesheet" crossorigin href="/transfer/assets/index-DyHQWnZs.css">
+  <script>
+    (function() {
+      var params = new URLSearchParams(window.location.search);
+      var captureId = params.get('figmacapture');
+      var endpoint = params.get('figmaendpoint');
+      var delay = parseInt(params.get('figmadelay') || '1000', 10);
+      if (captureId && endpoint) {
+        var s = document.createElement('script');
+        s.src = 'https://mcp.figma.com/mcp/html-to-design/capture.js';
+        s.onload = function() {
+          setTimeout(function() {
+            window.figma && window.figma.captureForDesign({ captureId: captureId, endpoint: decodeURIComponent(endpoint), selector: 'body' });
+          }, delay);
+        };
+        document.head.appendChild(s);
+      }
+    })();
+  </script>
+    <script type="module" crossorigin src="/transfer/assets/index-Dwn1hCMU.js"></script>
+    <link rel="stylesheet" crossorigin href="/transfer/assets/index-nUfHRegq.css">
   </head>
   <body>
     <div id="root"></div>
